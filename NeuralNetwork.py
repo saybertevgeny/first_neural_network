@@ -13,10 +13,10 @@ class NeuralNetwork:
         self.learning_rate = learning_rate
         # матрица весовых коэфициентов от входного к скрытому слою
         # self.wih = numpy.random.rand(self.hidden_nodes, self.input_nodes) - 0.5
-        self.wih = numpy.random.normal(0.0, pow(self.hidden_nodes, -0.5))
+        self.wih = numpy.random.normal(0.0, pow(self.hidden_nodes, -0.5), (self.hidden_nodes, self.input_nodes))
         # матрица весовых коэфициентов от скрытого к выходному слою
         # self.woh = numpy.random.rand(self.output_nodes, self.hidden_nodes) - 0.5
-        self.woh = numpy.random.normal(0.0, pow(self.output_nodes, -0.5))
+        self.woh = numpy.random.normal(0.0, pow(self.output_nodes, -0.5), (self.output_nodes, self.hidden_nodes))
         self.activation_function = lambda x: scipy.special.expit(x)
 
     # тренировка сети
@@ -50,7 +50,7 @@ class NeuralNetwork:
         pass
 
     def query(self, inputs_list):
-        inputs = numpy.array(inputs_list, ndmin=2)
+        inputs = numpy.array(inputs_list, ndmin=2).T
 
         # Входящие сигналы для скрытого слоя
         hidden_inputs = numpy.dot(self.wih, inputs)
