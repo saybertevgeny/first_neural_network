@@ -15,7 +15,7 @@ learning_rate = 0.3
 n = NeuralNetwork(input_nodes, hidden_notes, output_notes, learning_rate)
 
 # загрузить в список тестовый набор данных CSV-файла набора MNIST
-training_data_file = open("mnist_train.csv")
+training_data_file = open("mnist_train_100.csv")
 training_data_list = training_data_file.readlines()
 training_data_file.close()
 
@@ -29,6 +29,6 @@ for record in training_data_list:
     n.train(inputs, targets)
     pass
 
-testRecord = training_data_list[71].split(',')
+testRecord = training_data_list[38].split(',')
 input_test = (numpy.asfarray(testRecord[1:]) / 255 * 0.99) + 0.01
 print(n.query(input_test))
